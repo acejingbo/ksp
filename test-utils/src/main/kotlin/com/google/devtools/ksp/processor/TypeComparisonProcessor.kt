@@ -48,6 +48,18 @@ open class TypeComparisonProcessor : AbstractTestProcessor() {
         }
 
         for (i in sortedTypes) {
+            if (i.toString().contains("ArrayList")) {
+                results.add("listOfErrorType = $i")
+                val argument = i.arguments.first()
+                results.add("listOfErrorTypeArgument = $argument")
+                val argumentType = argument.type
+                results.add("argumentType = $argumentType")
+                results.add("argumentType class = ${argumentType!!::class.qualifiedName}")
+                val resolvedArgumentType = argumentType.resolve()
+                results.add("argumentTypeResolved = $resolvedArgumentType")
+                results.add("argumentType class = ${resolvedArgumentType::class.qualifiedName}")
+            }
+
             for (j in sortedTypes) {
                 results.add("$i ?= $j : ${i.isAssignableFrom(j)}")
             }

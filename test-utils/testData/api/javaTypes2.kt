@@ -34,6 +34,9 @@ class ArrayTest {
     public static C[] javaArrayOfC() {
         return null;
     }
+    public static java.util.ArrayList<NonExistClass> javaListOfNonExistClass() {
+        return null;
+    }
 }
 
 // FILE: K.kt
@@ -43,5 +46,6 @@ open class C
 open class D : C()
 
 val j = ArrayTest.javaArrayOfC()
+val je = ArrayTest.javaListOfNonExistClass()
 val c: Array<C> = arrayOf()
 val d: Array<D> = arrayOf()

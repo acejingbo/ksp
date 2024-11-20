@@ -17,6 +17,7 @@
 
 package com.google.devtools.ksp.processor
 
+import com.google.devtools.ksp.getConstructors
 import com.google.devtools.ksp.getDeclaredFunctions
 import com.google.devtools.ksp.getDeclaredProperties
 import com.google.devtools.ksp.processing.Resolver
@@ -31,9 +32,15 @@ class AnnotationOnConstructorParameterProcessor : AbstractTestProcessor() {
             val prop1 = clz.getAllProperties().single { it.simpleName.asString() == "fullName" }
             val prop2 = clz.getDeclaredProperties().single { it.simpleName.asString() == "fullName" }
             prop1.annotations.forEach { anno ->
-                results.add(anno.shortName.asString())
+                results.add("Annotation on property: ${anno.shortName.asString()}")
             }
             results.add((prop1 === prop2).toString())
+
+            val constructorParam = clz.getConstructors().first().parameters.single { it.name?.asString() == "fullName" }
+            constructorParam.annotations.forEach { anno ->
+                results.add("Annotation on constructor param: ${anno.shortName.asString()}")
+            }
+
             val fun1 = clz.getAllFunctions().single { it.simpleName.asString() == "foo" }
             val fun2 = clz.getDeclaredFunctions().single { it.simpleName.asString() == "foo" }
             results.add((fun1 === fun2).toString())

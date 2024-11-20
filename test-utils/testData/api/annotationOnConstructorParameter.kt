@@ -17,15 +17,28 @@
 
 // TEST PROCESSOR: AnnotationOnConstructorParameterProcessor
 // EXPECTED:
-// Anno
+// Annotation on property: Anno
 // true
+// Annotation on constructor param: Anno
+// Annotation on constructor param: AnnoWithParamAndFieldTarget
+// Annotation on constructor param: JavaAnnoWithParamAndFieldTarget
 // true
 // END
+//FILE: b.java
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+
+@Target({ElementType.PARAMETER, ElementType.FIELD})
+public @interface JavaAnnoWithParamAndFieldTarget {}
+
 //FILE: a.kt
 annotation class Anno
 
+@Target(AnnotationTarget.VALUE_PARAMETER, AnnotationTarget.FIELD)
+annotation class AnnoWithParamAndFieldTarget
+
 data class Sample(
-    @Anno val fullName: String
+    @Anno @AnnoWithParamAndFieldTarget @JavaAnnoWithParamAndFieldTarget val fullName: String
 ) {
     fun foo() = 0
 }

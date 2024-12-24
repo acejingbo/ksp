@@ -17,6 +17,7 @@
 
 package com.google.devtools.ksp.processor
 
+import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.*
 
@@ -24,6 +25,7 @@ open class TypeAliasProcessor : AbstractTestProcessor() {
     val results = mutableListOf<String>()
     val types = mutableListOf<KSType>()
 
+    @OptIn(KspExperimental::class)
     override fun process(resolver: Resolver): List<KSAnnotated> {
         val byFinalSignature = mutableMapOf<String, MutableList<KSType>>()
         resolver.getNewFiles().flatMap { file ->
@@ -37,6 +39,8 @@ open class TypeAliasProcessor : AbstractTestProcessor() {
                     byFinalSignature.getOrPut(signatures.last()) {
                         mutableListOf()
                     }.add(propType)
+                    val propTypeJavaWildcard = resolver.getJavaWildcard(prop.type).resolve()
+                    append(" ( Type JavaWildcard Arguments: ${propTypeJavaWildcard.arguments} )")
                 }
             }
         }.forEach(results::add)

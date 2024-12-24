@@ -54,6 +54,9 @@ typealias MyList_B<R> = MyList<R>
 typealias MyList_String = MyList<String>
 typealias MyList_B_String = MyList_B<String>
 typealias MyListOfAlias = List<@JvmSuppressWildcards A>
+typealias MyMap<R> = HashMap<String, R>
+typealias MyFunction<R> = (input: R) -> String
+typealias Middleware<State> = (store: Foo<State>) -> (next: Bar) -> (action: Any) -> Any
 
 val a: A = ""
 val b: B = ""
@@ -68,6 +71,9 @@ val myList_String: MyList_String = TODO()
 val myList_b_String: MyList_B_String = TODO()
 val myListOfAlias: MyListOfAlias = TODO()
 val myListOfAliasInLib: MyListOfAliasInLib = TODO()
+val myMap: MyMap<Int> = TODO()
+val myFunction: MyFunction<Int> = TODO()
+val middleware: Middleware<RpState> = TODO()
 
 interface BaseViewHolder
 interface SpaceshipEmbedModel

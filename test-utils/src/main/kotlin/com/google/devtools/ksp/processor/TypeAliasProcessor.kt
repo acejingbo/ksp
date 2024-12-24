@@ -37,6 +37,7 @@ open class TypeAliasProcessor : AbstractTestProcessor() {
                     byFinalSignature.getOrPut(signatures.last()) {
                         mutableListOf()
                     }.add(propType)
+                    append(" ( Type Arguments: ${propType.arguments} )")
                 }
             }
         }.forEach(results::add)

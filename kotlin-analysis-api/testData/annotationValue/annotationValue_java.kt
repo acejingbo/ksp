@@ -22,9 +22,11 @@
 // MyClass: MyAnnotation: stringParam = 2
 // MyClass: MyAnnotation: stringParam2 = 1
 // MyClass: MyAnnotation: stringArrayParam = [3, 5, 7]
+// MyClass: MyAnnotation: floatParam = 0.0
 // MyClass: Containing.Nested
 // MyClassInLib: MyAnnotation
 // MyClassInLib: MyAnnotation: stringParam = 2
+// MyClassInLib: MyAnnotation: floatParam = NaN
 // MyClassInLib: MyAnnotation: stringParam2 = 1
 // MyClassInLib: MyAnnotation: stringArrayParam = [3, 5, 7]
 // MyClassInLib: Containing.Nested
@@ -38,6 +40,7 @@
 // @Suppress
 // RGB.G
 // JavaEnum.ONE
+// NaN
 // 31
 // [warning1, warning 2]
 // Sub: [i:42]
@@ -57,6 +60,7 @@ import java.lang.annotation.Target;
     String stringParam() default "1";
     String stringParam2() default "1";
     String[] stringArrayParam() default {"3", "5", "7"};
+    float floatParam() default 0.0f;
 }
 
 @interface Default {
@@ -69,7 +73,7 @@ import java.lang.annotation.Target;
 }
 
 interface MyInterface {}
-@MyAnnotation(stringParam = "2") @Containing.Nested class MyClassInLib implements MyInterface {}
+@MyAnnotation(stringParam = "2", floatParam = Float.NaN) @Containing.Nested class MyClassInLib implements MyInterface {}
 
 // FILE: OtherAnnotation.java
 import java.lang.annotation.Retention;
@@ -108,6 +112,7 @@ annotation class Bar(
     val argAnnoLib: Suppress,
     val argEnum: RGB,
     val argJavaNum: JavaEnum,
+    val argFloat: Float,
     val argDef: Int = 31
 )
 
@@ -128,7 +133,8 @@ argClsArray = kotlin.Array.class,
 argAnnoUser = @Foo(s = 17),
 argAnnoLib = @Suppress(names = {"name1", "name2"}),
 argEnum = RGB.G,
-argJavaNum = JavaEnum.ONE)
+argJavaNum = JavaEnum.ONE,
+argFloat = Float.NaN)
 public class JavaAnnotated {}
 
 // FILE: JavaEnum.java

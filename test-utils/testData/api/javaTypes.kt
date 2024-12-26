@@ -32,3 +32,4 @@
 val j = java.lang.String.valueOf("")
 val x: String = j
 val y: String? = j
+val errorType: NonExistType = TODO()

@@ -48,6 +48,15 @@ open class TypeComparisonProcessor : AbstractTestProcessor() {
         }
 
         for (i in sortedTypes) {
+            if (i.toString().contains("NonExistType")) {
+                val errorType = i
+                results.add("errorType = $errorType")
+                results.add("errorType.isError = ${errorType.isError}")
+                results.add("errorType.declaration = ${errorType.declaration}")
+                results.add("errorType.declaration.simpleName.asString() = ${errorType.declaration.simpleName.asString()}")
+                results.add("errorType.declaration.qualifiedName?.asString() = ${errorType.declaration.qualifiedName?.asString()}")
+                results.add("errorType name from regex = ${"""<ERROR TYPE: ([\w\s\.]+)>""".toRegex().find(errorType.toString())?.destructured?.toList()?.first()}")
+            }
             for (j in sortedTypes) {
                 results.add("$i ?= $j : ${i.isAssignableFrom(j)}")
             }

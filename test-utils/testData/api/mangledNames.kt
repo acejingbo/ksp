@@ -93,6 +93,10 @@
 // get-internalAbstractVar -> getInternalAbstractVar$lib_xyz
 // set-internalAbstractVar -> setInternalAbstractVar$lib_xyz
 // libPackage.MyInterface -> declarations
+// get-isFoo -> isFoo
+// set-isFoo -> setFoo
+// get-isoSomething -> getIsoSomething
+// set-isoSomething -> setIsoSomething
 // get-x -> getX
 // get-y -> getY
 // set-y -> setY
@@ -131,6 +135,8 @@ abstract class AbstractKotlinClass {
 interface MyInterface {
     val x:Int
     var y:Int
+    var isFoo: Boolean
+    var isoSomething: Int
 }
 // MODULE: mainModule.abc(lib.xyz)
 // FILE: input.kt

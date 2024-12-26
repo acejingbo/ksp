@@ -56,6 +56,9 @@ class JavaModifierProcessor : AbstractTestProcessor() {
             results.add("$declName: Visibility: $visibility")
             results.add("$declName: Modifiers: $modifiers")
         }
+
+        results.add("SomeEnumInSrc.ONE: Modifiers: ${resolver.getClassDeclarationByName("SomeEnumInSrc.ONE")!!.modifiers}")
+        results.add("SomeEnumInLib.ONE: Modifiers: ${resolver.getClassDeclarationByName("SomeEnumInLib.ONE")!!.modifiers}")
         return emptyList()
     }
 

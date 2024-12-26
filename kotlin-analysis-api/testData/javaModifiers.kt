@@ -156,6 +156,14 @@ open class DependencyOuterKotlinClass {
     @Synchronized
     fun synchronizedFun(): String = ""
 }
+
+// FILE: SomeEnumInLib.kt
+enum class SomeEnumInLib {
+    ONE,
+    TWO,
+    THREE,
+}
+
 // MODULE: main(module1)
 // FILE: ASrc.kt
 private typealias TypeAliasInKt = Int
@@ -252,4 +260,11 @@ open class OuterKotlinClass {
 
     @Synchronized
     fun synchronizedFun(): String = ""
+}
+
+// FILE: SomeEnumInSrc.kt
+enum class SomeEnumInSrc {
+    ONE,
+    TWO,
+    THREE,
 }

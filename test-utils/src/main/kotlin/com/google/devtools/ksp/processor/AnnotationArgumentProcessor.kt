@@ -26,7 +26,7 @@ class AnnotationArgumentProcessor : AbstractTestProcessor() {
     val visitor = ArgumentVisitor()
 
     override fun process(resolver: Resolver): List<KSAnnotated> {
-        listOf("MyClass", "MyClassInLib").forEach { clsName ->
+        listOf("MyClass", "MyClassInLib", "MyClassKotlin").forEach { clsName ->
             resolver.getClassDeclarationByName(clsName)?.let { cls ->
                 cls.annotations.forEach() { annotation ->
                     results.add(

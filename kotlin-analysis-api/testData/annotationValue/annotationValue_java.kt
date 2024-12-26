@@ -22,12 +22,19 @@
 // MyClass: MyAnnotation: stringParam = 2
 // MyClass: MyAnnotation: stringParam2 = 1
 // MyClass: MyAnnotation: stringArrayParam = [3, 5, 7]
+// MyClass: MyAnnotation2
+// MyClass: MyAnnotation2: value = [4]
 // MyClass: Containing.Nested
 // MyClassInLib: MyAnnotation
 // MyClassInLib: MyAnnotation: stringParam = 2
 // MyClassInLib: MyAnnotation: stringParam2 = 1
 // MyClassInLib: MyAnnotation: stringArrayParam = [3, 5, 7]
+// MyClassInLib: MyAnnotation2
+// MyClassInLib: MyAnnotation2: value = [4]
 // MyClassInLib: Containing.Nested
+// MyClassKotlin: MyAnnotation2
+// MyClassKotlin: MyAnnotation2: value = [4]
+// MyClassKotlin: Containing.Nested
 // Str
 // 42
 // Foo
@@ -59,6 +66,11 @@ import java.lang.annotation.Target;
     String[] stringArrayParam() default {"3", "5", "7"};
 }
 
+@Target({ElementType.TYPE, ElementType.TYPE_USE})
+@interface MyAnnotation2 {
+    String[] value() default {"3", "5", "7"};
+}
+
 @interface Default {
     Class<?>[] value();
     int value1();
@@ -69,7 +81,7 @@ import java.lang.annotation.Target;
 }
 
 interface MyInterface {}
-@MyAnnotation(stringParam = "2") @Containing.Nested class MyClassInLib implements MyInterface {}
+@MyAnnotation(stringParam = "2") @MyAnnotation2("4") @Containing.Nested class MyClassInLib implements MyInterface {}
 
 // FILE: OtherAnnotation.java
 import java.lang.annotation.Retention;
@@ -88,7 +100,10 @@ annotation class KotlinAnnotationWithDefaults(val otherAnnotation: OtherAnnotati
 
 // MODULE: main(module1)
 // FILE: Test.java
-@MyAnnotation(stringParam = "2") @Containing.Nested class MyClass implements MyInterface {}
+@MyAnnotation(stringParam = "2") @MyAnnotation2("4") @Containing.Nested class MyClass implements MyInterface {}
+
+// FILE: Test2.kt
+@MyAnnotation2("4") @Containing.Nested class MyClassKotlin : MyInterface
 
 // FILE: a.kt
 enum class RGB {

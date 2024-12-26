@@ -32,6 +32,7 @@
 // @Suppress
 // G
 // ONE
+// <ERROR TYPE: NonExistEnumType.ONE>
 // 31
 // Throws
 // END
@@ -83,6 +84,7 @@ annotation class Bar(
     val argAnnoLib: Suppress,
     val argEnum: RGB,
     val argJavaNum: JavaEnum,
+    val argIntFromEnum: Int,
     val argDef: Int = 31
 )
 
@@ -101,7 +103,8 @@ fun Fun() {
         Foo(17),
         Suppress("name1", "name2"),
         RGB.G,
-        JavaEnum.ONE
+        JavaEnum.ONE,
+        NonExistEnumType.ONE,
     )
     class Local
 }

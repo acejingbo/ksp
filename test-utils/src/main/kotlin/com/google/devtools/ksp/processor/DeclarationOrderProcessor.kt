@@ -31,15 +31,9 @@ class DeclarationOrderProcessor : AbstractTestProcessor() {
         containers.forEach { klass ->
             result.add(klass.qualifiedName!!.asString())
             result.addAll(
-                resolver.getDeclarationsInSourceOrder(klass).filterIsInstance<KSPropertyDeclaration>().map {
+                resolver.getDeclarationsInSourceOrder(klass).map {
                     it.toSignature(resolver)
                 }
-            )
-            result.addAll(
-                resolver.getDeclarationsInSourceOrder(klass).filterIsInstance<KSFunctionDeclaration>()
-                    .filter { !it.isConstructor() }.map {
-                        it.toSignature(resolver)
-                    }
             )
         }
         result.addAll(

@@ -100,19 +100,25 @@
 // MODULE: module1
 // FILE: lib/KotlinClass.kt
 package lib;
-class KotlinClass {
+class KotlinClass(var property0: String) {
     val b: String = TODO()
     val a: String = TODO()
     val c: String = TODO()
+
+    constructor (param1: Boolean) : this("hello")
+
     val isB:String = TODO()
-    val isA:String = TODO()
-    val isC:String = TODO()
+
     val noBackingB: String
         get() = ""
     val noBackingA: String
         get() = ""
     val noBackingC: String
         get() = ""
+
+    val isA:String = TODO()
+    val isC:String = TODO()
+
     var noBackingVarB: String
         get() = ""
         set(value) {}
@@ -122,14 +128,24 @@ class KotlinClass {
     var noBackingVarC: String
         get() = ""
         set(value) {}
+
+    companion object {
+        @JvmField var companionPropertyJvmField: String? = null
+        @JvmStatic fun companionFunctionJvmStatic(): Unit {}
+    }
+
     private fun privateFun(): Unit = TODO()
     protected fun protectedFun(): Unit = TODO()
     internal fun internalFun(): Unit = TODO()
+
+    constructor () : this("hello")
+
     fun publicFun(): Unit = TODO()
     fun overloaded(x:String): String = TODO()
     fun overloaded(x:Int): String = TODO()
     fun overloaded(): String = TODO()
     fun overloaded(x:String, y:String): String = TODO()
+
 }
 // FILE: lib/JavaClass.java
 package lib;

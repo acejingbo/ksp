@@ -104,7 +104,7 @@
  */
 package libPackage;
 inline class Inline1(val value:String)
-class Foo {
+class Foo internal constructor() {
     var normalProp:String = TODO()
     var inlineProp: Inline1 = TODO()
     internal var internalProp: String = TODO()
@@ -136,7 +136,7 @@ interface MyInterface {
 // FILE: input.kt
 package mainPackage;
 inline class Inline1(val value:String)
-class Foo {
+class Foo internal constructor() {
     var normalProp:String = TODO()
     var inlineProp: Inline1 = TODO()
     internal var internalProp: String = TODO()

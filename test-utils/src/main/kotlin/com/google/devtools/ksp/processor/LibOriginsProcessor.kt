@@ -43,7 +43,10 @@ class LibOriginsProcessor : AbstractTestProcessor() {
         }
 
         override fun visitAnnotation(annotation: KSAnnotation, data: Unit) {
-            result.add("annotation: ${annotation.shortName.asString()}: ${annotation.origin.name}")
+            result.add("annotation: ${annotation.shortName.asString()} (parent: ${annotation.parent.toString()}) ${annotation.origin.name}")
+            annotation.arguments.forEach { argument: KSValueArgument ->
+                result.add("annotation: ${annotation.shortName.asString()} (parent: ${annotation.parent.toString()}): argument: ${argument.name?.asString()} ${annotation.origin.name}")
+            }
             super.visitAnnotation(annotation, data)
         }
 
@@ -79,7 +82,7 @@ class LibOriginsProcessor : AbstractTestProcessor() {
 
         // FIXME: workaround for https://github.com/google/ksp/issues/418
         resolver.getDeclarationsFromPackage("foo.bar").forEach {
-            if (it.containingFile == null) {
+            if (it.containingFile == null || it.containingFile.toString().endsWith(".class")) {
                 it.accept(visitor, Unit)
             }
         }

@@ -17,10 +17,11 @@
 
 // TEST PROCESSOR: LibOriginsProcessor
 // EXPECTED:
-// annotation: Anno1: KOTLIN_LIB
-// annotation: Anno2: JAVA_LIB
-// annotation: Anno3: KOTLIN
-// annotation: Anno4: JAVA
+// annotation: Anno1 (parent: KotlinLibClass) KOTLIN_LIB
+// annotation: Anno2 (parent: JavaLib) JAVA_LIB
+// annotation: Anno2 (parent: JavaLib): argument: id JAVA_LIB
+// annotation: Anno3 (parent: KotlinSrcClass) KOTLIN
+// annotation: Anno4 (parent: JavaSrc) JAVA
 // classifier ref: Anno1: KOTLIN_LIB
 // classifier ref: Anno1: KOTLIN_LIB
 // classifier ref: Anno2: JAVA_LIB
@@ -93,6 +94,9 @@
 // classifier ref: Short: SYNTHETIC
 // classifier ref: Short: SYNTHETIC
 // classifier ref: Short: SYNTHETIC
+// classifier ref: String: KOTLIN_LIB
+// classifier ref: String: KOTLIN_LIB
+// classifier ref: String: KOTLIN_LIB
 // classifier ref: T1: KOTLIN_LIB
 // classifier ref: T1: KOTLIN_LIB
 // classifier ref: T1: KOTLIN_LIB
@@ -113,6 +117,7 @@
 // declaration: foo.bar.Anno1.<init>: KOTLIN_LIB
 // declaration: foo.bar.Anno1: KOTLIN_LIB
 // declaration: foo.bar.Anno2.<init>: KOTLIN_LIB
+// declaration: foo.bar.Anno2.id: KOTLIN_LIB
 // declaration: foo.bar.Anno2: KOTLIN_LIB
 // declaration: foo.bar.Anno3.<init>: KOTLIN_LIB
 // declaration: foo.bar.Anno3: KOTLIN_LIB
@@ -154,6 +159,7 @@
 // declaration: foo.bar.kotlinLibProperty: KOTLIN_LIB
 // declaration: foo.bar.kotlinSrcFuntion: KOTLIN
 // declaration: foo.bar.kotlinSrcProperty: KOTLIN
+// property accessor: id.getter(): KOTLIN_LIB
 // property accessor: kotlinLibProperty.getter(): KOTLIN_LIB
 // property accessor: kotlinSrcProperty.getter(): SYNTHETIC
 // property accessor: p1.getter(): KOTLIN_LIB
@@ -228,6 +234,9 @@
 // reference: Short: SYNTHETIC
 // reference: Short: SYNTHETIC
 // reference: Short: SYNTHETIC
+// reference: String: KOTLIN_LIB
+// reference: String: KOTLIN_LIB
+// reference: String: KOTLIN_LIB
 // reference: T1: KOTLIN_LIB
 // reference: T1: KOTLIN_LIB
 // reference: T1: KOTLIN_LIB
@@ -257,6 +266,7 @@
 // type arg: INVARIANT T3: KOTLIN
 // type arg: INVARIANT T3: KOTLIN
 // type arg: INVARIANT T3: SYNTHETIC
+// value param: id: KOTLIN_LIB
 // value param: p0: JAVA_LIB
 // value param: p1: JAVA_LIB
 // value param: p1: KOTLIN_LIB
@@ -278,7 +288,7 @@ val kotlinLibProperty: Int = 0
 fun kotlinLibFuntion(): Int = 0
 
 annotation class Anno1
-annotation class Anno2
+annotation class Anno2 (val id: String = "")
 annotation class Anno3
 annotation class Anno4
 
@@ -295,7 +305,7 @@ package foo.bar;
 
 import java.util.ArrayList;
 
-@Anno2
+@Anno2(id = "JavaLibAnno2")
 class JavaLib<T2> {
     Byte javaLibField = 0;
     Byte javaLibFunction() {

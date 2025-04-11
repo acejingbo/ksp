@@ -424,7 +424,6 @@ class KSPAATest : AbstractKSPAATest() {
         runTest("../test-utils/testData/api/lateinitProperties.kt")
     }
 
-    @Disabled
     @TestMetadata("libOrigins.kt")
     @Test
     fun testLibOrigins() {

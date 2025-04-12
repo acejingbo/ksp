@@ -97,7 +97,7 @@
 // get-y -> getY
 // set-y -> setY
 // END
-// MODULE: lib.xyz
+// MODULE: lib-xyz
 // FILE: input.kt
 /**
  * control group
@@ -132,7 +132,7 @@ interface MyInterface {
     val x:Int
     var y:Int
 }
-// MODULE: mainModule.abc(lib.xyz)
+// MODULE: mainModule.abc(lib-xyz)
 // FILE: input.kt
 package mainPackage;
 inline class Inline1(val value:String)
